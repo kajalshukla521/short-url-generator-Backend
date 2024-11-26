@@ -1,0 +1,22 @@
+{
+  "name": "short-url-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --env-file=.env.product app.js",
+    "dev": "nodemon --env-file=.env.dev app.js",
+    "deploy": "nodemon --env-file=.env.product app.js"
+  },
+  "author": "kajal shukla",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "express": "^4.21.1",
+    "mongoose": "^8.8.2",
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
