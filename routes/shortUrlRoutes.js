@@ -1,12 +1,22 @@
 const express = require('express');
-const { getShortURlController, createShortURlController, updateShortURlController, partialUpdateShortURlController, deleteShortURlController } = require('../controllers/ShortURlController');
+const getShortURlController = require('../controllers/getShortUrlController');
+
+const updateShortURlController = require('../controllers/updateShortUrlController');
+const deleteShortURlController = require('../controllers/deleteShortUrlController');
+const createShortURlController = require('../controllers/createShortUrlControllers');
+
 const router = express.Router();
 
-// GET
-router.get('/', getShortURlController)
-router.post('/', createShortURlController)
-router.put('/', updateShortURlController)
-router.patch('/', partialUpdateShortURlController)
-router.delete('/', deleteShortURlController)
-const shortUrlRouter = router;
-module.exports = shortUrlRouter;
+// GET - Fetch all short URLs
+router.get('/getshorturl', getShortURlController);
+
+// POST - Create a new short URL
+router.post('/createshorturl',createShortURlController );
+
+// PUT - Update a short URL (Full update)
+router.put('/updateshorturl/:id', updateShortURlController);
+
+// DELETE - Remove a short URL by ID
+router.delete('/deleteshorturl/:id', deleteShortURlController);
+
+module.exports = router;

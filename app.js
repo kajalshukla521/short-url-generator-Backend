@@ -1,10 +1,12 @@
-require('dotenv').config(); 
+require('dotenv').config();
 const express = require('express');
 const connectDatabase = require('./config/db');
-const shortUrlRouter = require('./routes/shortUrlRoutes');
+const shortUrlRoutes = require('./routes/shortUrlRoutes');
 const app = express();
-const hostname = process.env.HOSTNAME ?? 'localhost';
-const port = process.env.PORT ?? 5000;
+
+// Server Configuration
+const hostname = process.env.HOSTNAME || 'localhost';
+const port = process.env.PORT || 5000;
 
 // Connect to Database
 connectDatabase();
@@ -12,13 +14,13 @@ connectDatabase();
 // Middleware
 app.use(express.json());
 
-// Basic route
-// app.get('/', (req, res) => {
-//     res.send('Hello World!');
-// });
+// Routes
+app.use('/api', shortUrlRoutes);
 
-
-app.use('/api/shorturl', shortUrlRouter)
+// Handle Invalid Routes
+app.use((req, res) => {
+    res.status(404).json({ error: 'Route not found' });
+});
 
 // Start the server
 app.listen(port, () => {
